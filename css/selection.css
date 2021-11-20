@@ -15,10 +15,17 @@ img {
   display: -ms-grid;
   display: grid;
   margin-top: 135px;
-  row-gap: 50px;
+  grid-auto-flow: column;
 }
 
 button {
   width: 300px;
+}
+
+#enemy_container {
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  row-gap: 50px;
 }
 /*# sourceMappingURL=selection.css.map */
