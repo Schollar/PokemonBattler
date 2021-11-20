@@ -1,3 +1,25 @@
-@import 'global';
-@import 'header';
-@import 'footer';
+@import "global";
+@import "header";
+@import "footer";
+
+#page_container {
+    display: grid;
+    place-items: center;
+    grid-auto-flow: column;
+    position: relative;
+    top: 200px;
+}
+.card {
+    display: grid;
+    row-gap: 50px;
+    border: 1px solid black;
+    border-radius: 10px;
+    place-items: center;
+    padding: 20px;
+}
+
+img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+}

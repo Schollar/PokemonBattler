@@ -1,0 +1,21 @@
+img {
+    width: 200px;
+    height: 200px;
+}
+
+#chosen_selection {
+    display: grid;
+    place-items: center;
+    row-gap: 50px;
+}
+
+#page_container {
+    place-items: center;
+    display: grid;
+    margin-top: 135px;
+    row-gap: 50px;
+}
+
+button {
+    width: 300px;
+}
