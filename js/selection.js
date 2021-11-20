@@ -19,13 +19,15 @@ function use_potion() {
 function player_attack(num) {
 
     enemy_current_health -= num;
-    enemy_health.innerText = `Health: ${enemy_current_health} / ${enemy_pokemon.maxhealth}`
+    enemy_health.innerText = `Health: ${enemy_current_health} / ${enemy_pokemon_selection.maxhealth}`
     if (enemy_current_health <= 0) {
         winner_message.innerText = "Congrats You have won!"
         setTimeout(assign_window, 3000);
     } else {
         winner_message.innerText = "Enemy's Turn to attack!"
-        setTimeout(enemy_attack, 2000);
+        setTimeout(function () {
+            enemy_attack(enemy_pokemon_selection)
+        }, 2000)
         document.getElementById('attack_container').style.pointerEvents = 'none';
         document.getElementById('attack_container').style.userSelect = 'none';
     }
@@ -33,20 +35,20 @@ function player_attack(num) {
     Cookies.set('game_status', JSON.stringify(game_state));
 
 }
-function enemy_attack() {
+function enemy_attack(object) {
     enemy_attack_num = Math.random() * (4 - 1) + 1;
-
     if (enemy_attack_num >= 3) {
-        user_current_health -= enemy_pokemon.attack3;
+        user_current_health -= object.attack3;
     } else if (enemy_attack_num >= 2) {
-        user_current_health -= enemy_pokemon.attack2;
+        user_current_health -= object.attack2;
     } else {
-        user_current_health -= enemy_pokemon.attack1;
+        user_current_health -= object.attack1;
     }
 
     user_health.innerText = `Health: ${user_current_health} / ${game_state.userMaxHealth}`
     if (user_current_health <= 0) {
         winner_message.innerText = "Sorry you have been defeated!"
+        setTimeout(assign_window, 3000);
     } else {
         winner_message.innerText = "It is now your turn to attack!"
     }
@@ -55,26 +57,21 @@ function enemy_attack() {
     document.getElementById('attack_container').style.pointerEvents = 'auto';
     document.getElementById('attack_container').style.pointerEvents = 'auto';
 }
-function enemy_selection(enemy) {
-    var enemy_selection = document.createElement('section');
-    enemy_selection.setAttribute('id', 'enemy_container');
-
+function enemy_selection(object) {
+    var enemy_section = document.createElement('section')
     var enemy_name = document.createElement('h1');
-    enemy_name.innerText = enemy.name;
-    enemy_selection.appendChild(enemy_name);
-    var enemy_max_health = enemy.maxhealth;
-
-    enemy_health.innerText = `Health: ${enemy_current_health} / ${enemy_pokemon.maxhealth}`;
-    enemy_selection.appendChild(enemy_health);
-
     var enemy_image = document.createElement('img');
-    enemy_image.setAttribute('src', enemy.img_src);
-    enemy_selection.appendChild(enemy_image);
+    enemy_section.setAttribute('id', 'enemy_container')
 
-    var attack1 = document.createElement('button');
-    attack1.innerText = `${enemy.attack1} Damage Attack`;
-    enemy_selection.appendChild(attack1);
-    page_container.appendChild(enemy_selection);
+    enemy_name.innerText = object.name;
+    var enemy_max_health = object.maxhealth;
+    enemy_health.innerText = `Health: ${enemy_max_health} / ${enemy_max_health}`;
+    enemy_image.setAttribute('src', object.img_src);
+
+    enemy_section.appendChild(enemy_name);
+    enemy_section.appendChild(enemy_health);
+    enemy_section.appendChild(enemy_image);
+    page_container.appendChild(enemy_section);
 }
 
 
@@ -122,19 +119,37 @@ function selection_card(user_selection) {
     }
 }
 
-var enemy_pokemon =
+var enemy_pokemon = {
 
-{
-    name: 'Squirtle',
-    img_src: "https://images.saymedia-content.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:eco%2Cw_1200/MTc2MjY3Mzg3MDczNDcxNjc4/pokemon-squirtle-nicknames.jpg",
-    maxhealth: 40,
-    attack1: 5,
-    attack2: 7,
-    attack3: 9
+    squirtle: {
+        name: 'Squirtle',
+        img_src: "https://images.saymedia-content.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:eco%2Cw_1200/MTc2MjY3Mzg3MDczNDcxNjc4/pokemon-squirtle-nicknames.jpg",
+        maxhealth: 40,
+        attack1: 9,
+        attack2: 11,
+        attack3: 13
 
-}
+    },
+    pikachu: {
+        name: 'Pikachu',
+        img_src: "https://images.saymedia-content.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:eco%2Cw_1200/MTc2MjY3Mzg3MDczNDcxNjc4/pokemon-squirtle-nicknames.jpg",
+        maxhealth: 50,
+        attack1: 5,
+        attack2: 7,
+        attack3: 9
 
+    },
+    charmander: {
+        name: 'Charmander',
+        img_src: "https://images.saymedia-content.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:eco%2Cw_1200/MTc2MjY3Mzg3MDczNDcxNjc4/pokemon-squirtle-nicknames.jpg",
+        maxhealth: 70,
+        attack1: 15,
+        attack2: 20,
+        attack3: 25
 
+    }
+
+};
 var page_container = document.getElementById('page_container');
 var winner_message = document.createElement('h1');
 page_container.appendChild(winner_message);
@@ -179,10 +194,11 @@ var chosen_one = {
 
 var game_state = JSON.parse(Cookies.get('game_status'));
 var user_selection = Cookies.get('chosen');
+var enemy_pokemon_selection = game_state.computerPokemonSelection;
 var user_current_health = game_state.userCurrentHealth;
 var enemy_current_health = game_state.computerCurrentHealth;
 var enemy_health = document.createElement('p');
 var user_health = document.createElement('p');
 var chosen_selection = document.getElementById('chosen_selection');
 selection_card(user_selection);
-enemy_selection(enemy_pokemon);
+enemy_selection(enemy_pokemon_selection);
