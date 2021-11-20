@@ -23,3 +23,9 @@ img {
     height: 200px;
     border-radius: 10px;
 }
+
+.attacks_container {
+    display: grid;
+    place-items: center;
+    row-gap: 5px;
+}

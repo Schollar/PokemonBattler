@@ -44,4 +44,11 @@ img {
   height: 200px;
   border-radius: 10px;
 }
+
+.attacks_container {
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  row-gap: 5px;
+}
 /*# sourceMappingURL=style.css.map */

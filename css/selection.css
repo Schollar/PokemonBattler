@@ -28,4 +28,11 @@ button {
   place-items: center;
   row-gap: 50px;
 }
+
+.attack_container {
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  row-gap: 25px;
+}
 /*# sourceMappingURL=selection.css.map */
