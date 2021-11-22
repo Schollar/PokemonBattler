@@ -14,7 +14,10 @@ function use_potion() {
     } else {
         user_health.innerText = `Health: ${user_current_health} / ${game_state.userMaxHealth}`
     }
-
+    winner_message.innerText = `It's the enemies turn!`
+    setTimeout(function () {
+        enemy_attack(enemy_pokemon_selection)
+    }, 2000)
 }
 function player_attack(num) {
 
@@ -76,19 +79,18 @@ function enemy_selection(object) {
 
 
 function selection_card(user_selection) {
-    var selected = chosen_one[user_selection];
-    if (selected === undefined) {
+    if (user_selection === undefined) {
         document.body.innerHTML = "<h1>Please Choose a valid pokemon!</h1>";
     } else {
         // Displaying Chosen message
-        chosen_selection.innerText = `You have picked ${selected.name} Nice!`;
+        chosen_selection.innerText = `You have picked ${user_selection.name} Nice!`;
         // setting up our health variables
 
-        user_health.innerText = `Health: ${user_current_health} / ${selected.maxhealth}`
+        user_health.innerText = `Health: ${user_selection.maxhealth} / ${user_selection.maxhealth}`
         chosen_selection.appendChild(user_health);
         // Creating and displaying the chosen image
         var pokemon_selected = document.createElement('img');
-        pokemon_selected.setAttribute('src', selected.img_src);
+        pokemon_selected.setAttribute('src', user_selection.img_src);
         // Appending image to parent
 
         chosen_selection.appendChild(pokemon_selected);
@@ -97,18 +99,18 @@ function selection_card(user_selection) {
         chosen_selection.appendChild(attack_container);
 
         var attack1 = document.createElement('button');
-        attack1.innerText = `${selected.attack1} Damage Attack`;
-        attack1.setAttribute('onclick', `player_attack(${selected.attack1})`);
+        attack1.innerText = `${user_selection.attack1} Damage Attack`;
+        attack1.setAttribute('onclick', `player_attack(${user_selection.attack1})`);
         attack_container.appendChild(attack1);
 
         var attack2 = document.createElement('button');
-        attack2.innerText = `${selected.attack2} Damage Attack`;
-        attack2.setAttribute('onclick', `player_attack(${selected.attack2})`);
+        attack2.innerText = `${user_selection.attack2} Damage Attack`;
+        attack2.setAttribute('onclick', `player_attack(${user_selection.attack2})`);
         attack_container.appendChild(attack2);
 
         var attack3 = document.createElement('button');
-        attack3.innerText = `${selected.attack3} Damage Attack`;
-        attack3.setAttribute('onclick', `player_attack(${selected.attack3})`);
+        attack3.innerText = `${user_selection.attack3} Damage Attack`;
+        attack3.setAttribute('onclick', `player_attack(${user_selection.attack3})`);
         attack_container.appendChild(attack3);
 
         var potion = document.createElement('button');
@@ -186,16 +188,17 @@ var chosen_one = {
         name: 'pikachu',
         img_src: "https://secure.img1-fg.wfcdn.com/im/77981853/resize-h755-w755%5Ecompr-r85/8470/84707680/Pokemon+Pikachu+Wall+Decal.jpg",
         maxhealth: 40,
-        attack1: 5,
-        attack2: 7,
-        attack3: 9
+        attack1: 7,
+        attack2: 11,
+        attack3: 13
     }
 };
 
+
 var game_state = JSON.parse(Cookies.get('game_status'));
-var user_selection = Cookies.get('chosen');
+var user_selection = JSON.parse(Cookies.get('chosen'));
 var enemy_pokemon_selection = game_state.computerPokemonSelection;
-var user_current_health = game_state.userCurrentHealth;
+var user_current_health = game_state.userMaxHealth;
 var enemy_current_health = game_state.computerCurrentHealth;
 var enemy_health = document.createElement('p');
 var user_health = document.createElement('p');

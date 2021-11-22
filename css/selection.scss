@@ -16,18 +16,19 @@ img {
     grid-auto-flow: column;
 }
 
-button {
-    width: 300px;
-}
-
 #enemy_container {
     display: grid;
     place-items: center;
     row-gap: 50px;
 }
 
-.attack_container {
+#attack_container {
     display: grid;
     place-items: center;
     row-gap: 25px;
+    grid-template-columns: repeat(autofit, minmax(125px, 1fr));
+
+    > button {
+        width: 125;
+    }
 }
