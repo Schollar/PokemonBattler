@@ -2,7 +2,7 @@ var list_of_pokemon = {
 
     squirtle: {
         name: 'squirtle',
-        img_src: "https://images.saymedia-content.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:eco%2Cw_1200/MTc2MjY3Mzg3MDczNDcxNjc4/pokemon-squirtle-nicknames.jpg",
+        img_src: "https://images.wikidexcdn.net/mwuploads/wikidex/a/ae/latest/20200308135900/Blastoise_EpEc.gif",
         maxhealth: 50,
         attacks: [
             {
@@ -22,7 +22,7 @@ var list_of_pokemon = {
     },
     charizard: {
         name: 'charizard',
-        img_src: "https://www.pokencyclopedia.info/sprites/3ds/ani_6/3ani__006-mega-y__xy.gif",
+        img_src: "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/a/a7/latest/20200102060755/Charizard_EpEc.gif/228px-Charizard_EpEc.gif",
         maxhealth: 40,
         attacks: [
             {
@@ -41,7 +41,7 @@ var list_of_pokemon = {
     },
     bulbasaur: {
         name: 'bulbasaur',
-        img_src: "https://64.media.tumblr.com/172a6e167359e6b6832116ffac691e87/tumblr_inline_p7ja2uo4ZQ1qhvvv4_500.png",
+        img_src: "https://images.wikidexcdn.net/mwuploads/wikidex/3/39/latest/20200308155034/Venusaur_EpEc_variocolor.gif",
         maxhealth: 40,
         attacks: [
             {
@@ -60,7 +60,7 @@ var list_of_pokemon = {
     },
     pikachu: {
         name: 'pikachu',
-        img_src: "https://www.pokencyclopedia.info/sprites/3ds/ani_6/3ani__025-phd__oras.gif",
+        img_src: "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/1/12/latest/20191207032500/Pikachu_Gigamax_EpEc_variocolor.gif/344px-Pikachu_Gigamax_EpEc_variocolor.gif",
         maxhealth: 70,
         attacks: [
             {
