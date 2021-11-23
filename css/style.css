@@ -20,6 +20,13 @@ img, iframe {
   place-items: center;
 }
 
+body {
+  background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/2fb2821a-1406-4a1d-9b04-6668f278e944/d83jrvo-9c5af987-f243-4528-8455-5ca87551aa58.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzJmYjI4MjFhLTE0MDYtNGExZC05YjA0LTY2NjhmMjc4ZTk0NFwvZDgzanJ2by05YzVhZjk4Ny1mMjQzLTQ1MjgtODQ1NS01Y2E4NzU1MWFhNTguanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.ppI6BlfrDlMedMOYkq39S7-HuBZtJ8TNEQPKlCZxVl0");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
 #page_container {
   display: -ms-grid;
   display: grid;
@@ -37,11 +44,12 @@ img, iframe {
   border-radius: 10px;
   place-items: center;
   padding: 20px;
+  width: 250px;
 }
 
 img {
-  width: 200px;
-  height: 200px;
+  width: 59px;
+  height: 65px;
   border-radius: 10px;
 }
 

@@ -13,7 +13,7 @@ function pokemon_selection(pokemon) {
         var computer_selection = Math.random() * (4 - 1) + 1;
         // According to the number we get, it will choose the enemy pokemon
         if (computer_selection >= 3) {
-            var computer_pokemon_selected = list_of_pokemon.charmander;
+            var computer_pokemon_selected = list_of_pokemon.charizard;
         } else if (computer_selection >= 2) {
             var computer_pokemon_selected = list_of_pokemon.pikachu;
         } else {

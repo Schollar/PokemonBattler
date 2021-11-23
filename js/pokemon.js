@@ -20,22 +20,22 @@ var list_of_pokemon = {
         ]
 
     },
-    charmander: {
-        name: 'charmander',
-        img_src: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-blue-version/d/d4/Charmander.gif",
+    charizard: {
+        name: 'charizard',
+        img_src: "https://www.pokencyclopedia.info/sprites/3ds/ani_6/3ani__006-mega-y__xy.gif",
         maxhealth: 40,
         attacks: [
             {
                 name: 'Fireball',
-                damage: 1000,
+                damage: 25,
             },
             {
                 name: 'Scratch',
-                damage: 20,
+                damage: 5,
             },
             {
                 name: 'Bite',
-                damage: 15,
+                damage: 10,
             },
         ]
     },
@@ -60,12 +60,12 @@ var list_of_pokemon = {
     },
     pikachu: {
         name: 'pikachu',
-        img_src: "https://projectpokemon.org/images/normal-sprite/pikachu-popstar.gif",
+        img_src: "https://www.pokencyclopedia.info/sprites/3ds/ani_6/3ani__025-phd__oras.gif",
         maxhealth: 70,
         attacks: [
             {
-                name: 'Headbutt',
-                damage: 10,
+                name: 'Electro Shock',
+                damage: 25,
             },
             {
                 name: 'Scratch',

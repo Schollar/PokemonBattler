@@ -125,7 +125,7 @@ function selection_card(user_selection) {
         // Looping through to show attack buttons on the page
         for (var i = 0; i < user_selection.attacks.length; i++) {
             var attack = document.createElement('button');
-            attack.innerText = `${user_selection.attacks[i].name} Damage Attack`;
+            attack.innerText = user_selection.attacks[i].name;
             attack.setAttribute('onclick', `player_attack(${user_selection.attacks[i].damage})`);
             attack_container.appendChild(attack);
         }
