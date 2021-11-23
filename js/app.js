@@ -1,99 +1,78 @@
-// One comment because these are all the same, creating a function to create a cookie for each different pokemon
-// Then setting each function to an onclick in the html corresponding button
 function pokemon_selection(pokemon) {
-    // DO an error check
-    var selected_pokemon = JSON.stringify(user_pokemon_selection[pokemon]);
-    Cookies.set('chosen', (selected_pokemon));
-    var user_selected = user_pokemon_selection[pokemon];
-    var computer_selection = Math.random() * (4 - 1) + 1;
-
-    if (computer_selection >= 3) {
-        var computer_pokemon_selected = enemy_pokemon.charmander;
-    } else if (computer_selection >= 2) {
-        var computer_pokemon_selected = enemy_pokemon.pikachu;
+    // DO an error check to see if user did anything tricky
+    if (pokemon === undefined) {
+        var parent_container = document.getElementById('page_container');
+        parent_container.innerText = "Oops! You must select a pokemon!"
     } else {
-        var computer_pokemon_selected = enemy_pokemon.squirtle;
+        // Set our selected pokemon to a variable, stringify it and store it as a cookie
+        var selected_pokemon = JSON.stringify(list_of_pokemon[pokemon]);
+        Cookies.set('chosen', (selected_pokemon));
+        // Store the pokemon ojbect the user has selected
+        var user_selected = list_of_pokemon[pokemon];
+        // Doing math to get a random number between 1 and 4
+        var computer_selection = Math.random() * (4 - 1) + 1;
+        // According to the number we get, it will choose the enemy pokemon
+        if (computer_selection >= 3) {
+            var computer_pokemon_selected = list_of_pokemon.charmander;
+        } else if (computer_selection >= 2) {
+            var computer_pokemon_selected = list_of_pokemon.pikachu;
+        } else {
+            var computer_pokemon_selected = list_of_pokemon.squirtle;
+        }
+        //Setting our game state object 
+        var game_state = {
+
+            userMaxHealth: user_selected.maxhealth,
+            userCurrentHealth: user_selected.maxhealth,
+            computerCurrentHealth: computer_pokemon_selected.maxhealth,
+            computerMaxHealth: computer_pokemon_selected.maxhealth,
+            userPokemonSelection: user_selected,
+            computerPokemonSelection: computer_pokemon_selected
+        };
+        // Setting our object as a cookie
+        Cookies.set('game_status', JSON.stringify(game_state));
+        // CHanging pages to battlepage
+        window.location = '/pages/selection.html'
     }
-
-    var game_state = {
-
-        userMaxHealth: user_selected.maxhealth,
-        userCurrentHealth: user_selected.maxhealth,
-        computerCurrentHealth: computer_pokemon_selected.maxhealth,
-        computerMaxHealth: computer_pokemon_selected.maxhealth,
-        userPokemonSelection: user_selected,
-        computerPokemonSelection: computer_pokemon_selected
-    };
-
-    Cookies.set('game_status', JSON.stringify(game_state));
 }
+// Function which injects pokemon to choose from onto the page
+function inject_pokemon(object) {
+    // Get parent element store it into a variable
+    var parent_container = document.getElementById('page_container');
+    // Create our card section
+    var card_section = document.createElement('section');
+    card_section.classList.add('card');
+    // Create our Health, image, attacks container and setting it to our objects corresponding values
+    var health_tag = document.createElement('p');
+    health_tag.innerText = `Health: ${object.maxhealth}`;
 
+    var pokemon_image = document.createElement('img');
+    pokemon_image.setAttribute('src', object.img_src);
 
-var enemy_pokemon = {
+    var attacks_container = document.createElement('section');
+    attacks_container.classList.add('attacks_container');
 
-    squirtle: {
-        name: 'Squirtle',
-        img_src: "https://images.saymedia-content.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:eco%2Cw_1200/MTc2MjY3Mzg3MDczNDcxNjc4/pokemon-squirtle-nicknames.jpg",
-        maxhealth: 40,
-        attack1: 9,
-        attack2: 11,
-        attack3: 13
-
-    },
-    pikachu: {
-        name: 'Pikachu',
-        img_src: "https://images.saymedia-content.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:eco%2Cw_1200/MTc2MjY3Mzg3MDczNDcxNjc4/pokemon-squirtle-nicknames.jpg",
-        maxhealth: 50,
-        attack1: 5,
-        attack2: 7,
-        attack3: 9
-
-    },
-    charmander: {
-        name: 'Charmander',
-        img_src: "https://images.saymedia-content.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:eco%2Cw_1200/MTc2MjY3Mzg3MDczNDcxNjc4/pokemon-squirtle-nicknames.jpg",
-        maxhealth: 70,
-        attack1: 15,
-        attack2: 20,
-        attack3: 25
-
+    var attack_heading = document.createElement('h1');
+    attack_heading.innerText = "Attacks:";
+    attacks_container.appendChild(attack_heading);
+    // Loop through the attacks array and display them for each pokemon
+    for (var i = 0; i < object.attacks.length; i++) {
+        var attack = document.createElement('p');
+        attack.innerText = `${object.attacks[i].name}`;
+        attacks_container.appendChild(attack);
     }
+    // Setting  up our button to be clicked.
+    var select_button = document.createElement('button');
+    select_button.setAttribute('onclick', `pokemon_selection('${object.name}')`);
+    select_button.innerText = "Pick me!";
+    // Appending children to the parent so we see it on our page
 
-};
-
-var user_pokemon_selection = {
-
-    squirtle: {
-        name: 'squirtle',
-        img_src: "https://images.saymedia-content.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:eco%2Cw_1200/MTc2MjY3Mzg3MDczNDcxNjc4/pokemon-squirtle-nicknames.jpg",
-        maxhealth: 50,
-        attack1: 5,
-        attack2: 7,
-        attack3: 9
-
-    },
-    charmander: {
-        name: 'charmander',
-        img_src: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-blue-version/d/d4/Charmander.gif",
-        maxhealth: 40,
-        attack1: 5,
-        attack2: 7,
-        attack3: 9
-    },
-    bulbasaur: {
-        name: 'bulbasaur',
-        img_src: "https://64.media.tumblr.com/172a6e167359e6b6832116ffac691e87/tumblr_inline_p7ja2uo4ZQ1qhvvv4_500.png",
-        maxhealth: 40,
-        attack1: 5,
-        attack2: 7,
-        attack3: 9
-    },
-    pikachu: {
-        name: 'pikachu',
-        img_src: "https://secure.img1-fg.wfcdn.com/im/77981853/resize-h755-w755%5Ecompr-r85/8470/84707680/Pokemon+Pikachu+Wall+Decal.jpg",
-        maxhealth: 70,
-        attack1: 7,
-        attack2: 11,
-        attack3: 13
-    }
-};
+    card_section.appendChild(health_tag);
+    card_section.appendChild(pokemon_image);
+    card_section.appendChild(attacks_container);
+    card_section.appendChild(select_button);
+    parent_container.appendChild(card_section);
+}
+// In my own words, Object.keys gets the key's for my list of pokemon object, which would be the different pokemon names. Then it loops through each
+// Pokemon object key with foreach, calling the function inject pokemon and passing my pokemon object from list of pokemon as an argument. 
+Object.keys(list_of_pokemon).forEach((pokemon) => inject_pokemon(list_of_pokemon[pokemon]));
